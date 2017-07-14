@@ -1,0 +1,16 @@
+steps:
+# Uses the ubuntu build step:
+# to run a shell script and set TAG
+- name: 'ubuntu'
+  args: ['bash', './.scripts/set_tag.sh']
+  id: 'set_tag'
+
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+  - 'build'
+  - '--tag=eu.gcr.io/$PROJECT_ID/helm'
+  - '.'
+  id: 'build_image'
+
+images:
+- 'eu.gcr.io/$PROJECT_ID/helm'

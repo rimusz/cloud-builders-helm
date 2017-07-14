@@ -1,0 +1,14 @@
+steps:
+
+# fetch GKE cluster credentials to be used for helm step
+- name: 'gcr.io/cloud-builders/kubectl'
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=<your cluster's zone>'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=<your cluster's name>'
+  - 'KUBECONFIG=/workspace/.kube/config'
+  args: ['cluster-info']
+
+# run helm command to install/upgrade etcd-operator
+- name: 'eu.gcr.io/$PROJECT_ID/helm'
+  env: 'KUBECONFIG=/workspace/.kube/config'
+  args: [ "upgrade", "--install", "etcd-operator", "--namespace=etcd", "stable/etcd-operator" ]
