@@ -13,4 +13,4 @@ steps:
   id: 'build_image'
 
 images:
-- 'eu.gcr.io/$PROJECT_ID/helm'
+- 'gcr.io/$PROJECT_ID/helm'
