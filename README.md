@@ -1,4 +1,4 @@
-# Container builder with Helm client
+# GCP Container Builder with Helm client
 
 
 This Container Builder build step runs [`helm`](https://github.com/kubernetes/helm).
