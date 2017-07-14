@@ -37,4 +37,7 @@ To build this builder, run the following commands in this directory.
     $ gcloud container builds submit . --config=.pipeline/cloudbuild.yaml
 
 The first step sets Helm client version (stored in TAG file) to be used for building the image,
-and the second builds the docker image and stores it under your GCP `project/helm` repo
+and the second builds the docker image and stores it under your GCP `project/helm` repo.
+
+You can also automate builds by using `Container Registry build trigger` and connecting it your your `Github` repo.
+
