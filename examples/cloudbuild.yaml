@@ -11,7 +11,7 @@ steps:
 # run helm command to install/upgrade etcd-operator
 # optionally you can set to add any other Helm repository
 # to use charts from
-- name: 'eu.gcr.io/$PROJECT_ID/helm'
+- name: 'gcr.io/$PROJECT_ID/cloud-builders-helm'
   env:
   - 'KUBECONFIG=/workspace/.kube/config'
   - 'HELM_REPO_NAME=example'

@@ -2,6 +2,7 @@
 
 
 This Container Builder build step runs [`helm`](https://github.com/kubernetes/helm).
+Is available as `gcr.io/rimusz-lab1/cloud-builders-helm`
 
 ## Using this builder with Google Container Engine
 
