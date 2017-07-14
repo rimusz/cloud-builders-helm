@@ -26,7 +26,7 @@ first run a command to fetch cluster credentials as follows.
 
     gcloud container clusters get-credentials --zone "$CLOUDSDK_COMPUTE_ZONE" "$CLOUDSDK_CONTAINER_CLUSTER"`
 
-The `kubeconfig` will be saved to `/workspace/.kube/config`, then, `helm` will 
+The `kubeconfig` will be saved to `/workspace/.kube/config`, then, `helm` will
 have the configuration needed to talk to your GKE cluster.
 
 ## Building this builder
@@ -39,5 +39,7 @@ To build this builder, run the following commands in this directory.
 The first step sets Helm client version (stored in TAG file) to be used for building the image,
 and the second builds the docker image and stores it under your GCP `project/helm` repo.
 
-You can also automate builds by using `Container Registry build trigger` and connecting it your your `Github` repo.
+You can also automate builds by using `Container Registry build trigger` and connecting it your your `Github` repo
+as per example below:
 
+![dockerbuilder-trigger](dockerbuilder-trigger.png "dockerbuilder-trigger")
