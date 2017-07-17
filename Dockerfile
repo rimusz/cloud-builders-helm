@@ -16,7 +16,7 @@ ENV HELM_FILENAME helm-${HELM_VERSION}-linux-amd64.tar.gz
 ADD https://storage.googleapis.com/kubernetes-helm/${HELM_FILENAME} /tmp
 
 RUN apk add --update ca-certificates \
- && apk add --update -t deps sed \
+ && apk add --update -t deps sed bash \
  && tar -zxvf /tmp/${HELM_FILENAME} -C /tmp \
  && mv /tmp/linux-amd64/helm /usr/local/bin \
  && apk del --purge deps \
