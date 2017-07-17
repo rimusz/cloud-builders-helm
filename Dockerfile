@@ -1,4 +1,4 @@
-FROM alpine
+FROM gcr.io/google_containers/ubuntu-slim:0.13
 
 MAINTAINER Rimas Mocevicius <rmocius@gmail.com>
 
@@ -15,12 +15,8 @@ ENV HELM_FILENAME helm-${HELM_VERSION}-linux-amd64.tar.gz
 
 ADD https://storage.googleapis.com/kubernetes-helm/${HELM_FILENAME} /tmp
 
-RUN apk add --update ca-certificates \
- && apk add --update -t deps sed \
- && tar -zxvf /tmp/${HELM_FILENAME} -C /tmp \
+RUN  tar -zxvf /tmp/${HELM_FILENAME} -C /tmp \
  && mv /tmp/linux-amd64/helm /usr/local/bin \
- && apk del --purge deps \
- && rm /var/cache/apk/* \
  && rm -rf /tmp/*
 
 COPY helm.sh /usr/local/bin/helm.sh
