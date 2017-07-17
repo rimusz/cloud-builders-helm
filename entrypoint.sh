@@ -3,7 +3,7 @@
 set -e
 
 echo "Updating kubeconfig"
-#  sed -i '/cmd-/d' /workspace/.kube/config
+sed -i '/cmd-/d' /workspace/.kube/config
 
 echo "Running: helm init --client-only"
 helm init --client-only
