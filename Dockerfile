@@ -17,7 +17,7 @@ ADD https://storage.googleapis.com/kubernetes-helm/${HELM_FILENAME} /tmp
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
   ca-certificates \
-  && rm -rf /tmp/* /var/tmp/* \
+  && rm -rf /var/tmp/* \
   && rm -rf /var/lib/apt/lists/* \
   && rm -rf /var/cache/apt/archives/* \
   && tar -zxvf /tmp/${HELM_FILENAME} -C /tmp \
