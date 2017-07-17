@@ -16,4 +16,4 @@ steps:
   - 'KUBECONFIG=/workspace/.kube/config'
   - 'HELM_REPO_NAME=example'
   - 'HELM_REPO_URL=http://charts.example.com'
-  args: [ "upgrade", "--install", "etcd-operator", "--namespace=etcd", "stable/etcd-operator", "--set", "image.tag=v0.3.2" ]
+  args: [ "helm", upgrade", "--install", "etcd-operator", "--namespace=etcd", "stable/etcd-operator", "--set", "image.tag=v0.3.2" ]
