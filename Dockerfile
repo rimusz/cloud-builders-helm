@@ -13,14 +13,13 @@ LABEL org.label-schema.vcs-ref=$VCS_REF \
 ENV HELM_VERSION v2.5.0
 ENV HELM_FILENAME helm-${HELM_VERSION}-linux-amd64.tar.gz
 
-#ADD https://storage.googleapis.com/kubernetes-helm/${HELM_FILENAME} /tmp
+ADD https://storage.googleapis.com/kubernetes-helm/${HELM_FILENAME} /tmp
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
-  ca-certificates wget \
+  ca-certificates \
   && rm -rf /var/tmp/* \
   && rm -rf /var/lib/apt/lists/* \
   && rm -rf /var/cache/apt/archives/* \
-  && wget https://storage.googleapis.com/kubernetes-helm/${HELM_FILENAME} -P /tmp \
   && tar -zxvf /tmp/${HELM_FILENAME} -C /tmp \
   && mv /tmp/linux-amd64/helm /usr/local/bin \
   && rm -rf /tmp/*
