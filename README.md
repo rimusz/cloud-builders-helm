@@ -30,7 +30,7 @@ first run a command to fetch cluster credentials as follows.
 The `kubeconfig` will be saved to `/workspace/.kube/config`, then, `helm` will
 have the configuration needed to talk to your GKE cluster.
 
-Example of `cloudbuiuld.yaml` file:
+Example of `cloudbuild.yaml` file:
 ```
 steps:
 
