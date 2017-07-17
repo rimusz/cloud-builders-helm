@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/ash
 
 echo "Updating kubeconfig"
 sed -i '/cmd-/d' /workspace/.kube/config
