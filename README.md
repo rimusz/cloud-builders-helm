@@ -30,6 +30,30 @@ first run a command to fetch cluster credentials as follows.
 The `kubeconfig` will be saved to `/workspace/.kube/config`, then, `helm` will
 have the configuration needed to talk to your GKE cluster.
 
+Example of `cloudbuiuld.yaml` file:
+```
+steps:
+
+# fetch GKE cluster credentials to be used for helm step
+- name: 'gcr.io/cloud-builders/kubectl'
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=<your cluster's zone>'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=<your cluster's name>'
+  - 'KUBECONFIG=/workspace/.kube/config'
+  args: ['cluster-info']
+
+# run helm command to install/upgrade etcd-operator
+# optionally you can set to add any other Helm chart repository
+# to use charts from
+- name: 'gcr.io/$PROJECT_ID/cloud-builders-helm'
+  env:
+  - 'KUBECONFIG=/workspace/.kube/config'
+  - 'HELM_REPO_NAME=example'
+  - 'HELM_REPO_URL=http://charts.example.com'
+  args: [ "helm", upgrade", "--install", "etcd-operator", "--namespace=etcd", "stable/etcd-operator", "--set", "image.tag=v0.3.2" ]
+
+```
+
 ## Building this builder
 
 To build this builder, run the following commands in this directory.
