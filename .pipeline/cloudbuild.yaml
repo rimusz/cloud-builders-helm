@@ -8,9 +8,11 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   args:
   - 'build'
-  - '--tag=gcr.io/$PROJECT_ID/cloud-builders-helm'
+  - '--tag=gcr.io/$PROJECT_ID/cloud-builders-helm:latest'
+  - '--tag=gcr.io/$PROJECT_ID/cloud-builders-helm:$BRANCH_NAME'
   - '.'
   id: 'build_image'
 
 images:
-- 'gcr.io/$PROJECT_ID/cloud-builders-helm'
+- 'gcr.io/$PROJECT_ID/cloud-builders-helm:latest'
+- 'gcr.io/$PROJECT_ID/cloud-builders-helm:$BRANCH_NAME'
