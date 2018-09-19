@@ -10,17 +10,16 @@ LABEL org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.docker.dockerfile="/Dockerfile"
 
-ENV HELM_VERSION v2.8.2
-ENV HELM_FILENAME helm-${HELM_VERSION}-linux-amd64.tar.gz
+ENV DESIRED_VERSION _RELEASE_
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
-  ca-certificates wget \
+  ca-certificates curl git \
   && rm -rf /var/tmp/* \
   && rm -rf /var/lib/apt/lists/* \
   && rm -rf /var/cache/apt/archives/* \
-  && wget https://storage.googleapis.com/kubernetes-helm/${HELM_FILENAME} -P /tmp \
-  && tar -zxvf /tmp/${HELM_FILENAME} -C /tmp \
-  && mv /tmp/linux-amd64/helm /usr/local/bin \
+  && curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get > /tmp/get_helm.sh \
+  && chmod 700 /tmp/get_helm.sh \
+  && /tmp/get_helm.sh \
   && rm -rf /tmp/*
 
 COPY /entrypoint.sh /
