@@ -8,7 +8,7 @@ steps:
   - 'KUBECONFIG=/workspace/.kube/config'
   args: ['cluster-info']
 
-# run helm command to install/upgrade etcd-operator
+# run helm command to install/upgrade filebeat
 # optionally you can set to add any other Helm chart repository
 # to use charts from
 - name: 'gcr.io/$PROJECT_ID/cloud-builders-helm'
