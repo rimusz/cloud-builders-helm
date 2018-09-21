@@ -1,10 +1,10 @@
-# GCP Container Builder with Helm client
+# GCP Container Builder with Helm
 
 
 This Container Builder build step runs [`helm`](https://github.com/kubernetes/helm).
 Is available as `gcr.io/rimusz-lab1/cloud-builders-helm`
 
-It now also supports [Tillerless Helm](https://rimusz.net/tillerless-helm/) which solves all those tiller security issues, as `tiller` runs outside the GKE cluster.
+It now also supports [Tillerless Helm](https://rimusz.net/tillerless-helm/).
 
 ## Using this builder with Google Container Engine
 
