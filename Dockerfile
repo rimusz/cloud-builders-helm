@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   && rm -rf /var/tmp/* \
   && rm -rf /var/lib/apt/lists/* \
   && rm -rf /var/cache/apt/archives/* \
-  && curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get > /tmp/get_helm.sh \
+  && curl https://raw.githubusercontent.com/helm/helm/master/scripts/get > /tmp/get_helm.sh \
   && chmod 700 /tmp/get_helm.sh \
   && /tmp/get_helm.sh \
   && rm -rf /tmp/*
