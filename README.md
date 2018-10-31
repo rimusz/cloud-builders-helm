@@ -90,6 +90,7 @@ Below is example how to set it up with `uniqueId`.
     user=$(gcloud iam service-accounts describe your_project_id@cloudbuild.gserviceaccount.com | grep -o 'uniqueId.*' | awk -v FS="('|')" '{print $2}')
 
     # Grant Cloud Build Service Account `cluster-admin` role
+    kubectl create clusterrolebinding cluster-admin-your_project_id_sa --clusterrole cluster-admin --user your_project_id@cloudbuild.gserviceaccount.com
     kubectl create clusterrolebinding cluster-admin-$user --clusterrole cluster-admin --user $user
 
 ## Building this builder
@@ -97,7 +98,7 @@ Below is example how to set it up with `uniqueId`.
 To build this builder, run the following commands in this directory.
 
     $ ./.scripts/set_tag.sh
-    $ gcloud container builds submit . --config=.pipeline/cloudbuild.yaml
+    $ gcloud builds submit . --config=.pipeline/cloudbuild.yaml
 
 The first step sets Helm client version (stored in TAG file) to be used for building the image,
 and the second builds the docker image and stores it under your GCP `project/helm` repo.
