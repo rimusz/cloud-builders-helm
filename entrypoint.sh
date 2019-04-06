@@ -47,6 +47,12 @@ fi
 echo "Running: helm repo update"
 helm repo update
 
+# create tiller-namespace if it doesn't exist (helm --init would usually do this with server-side tiller'
+if [[ -n $TILLER_NAMESPACE ]]; then
+  echo "Ensuring tiller namespace $TILLER_NAMESPACE is created"
+  kubectl get namespace $TILLER_NAMESPACE || kubectl create namespace $TILLER_NAMESPACE
+fi
+
 # if 'TILLERLESS=false', run with server-side tiller
 if [ "$TILLERLESS" = false ]; then
   if [ "$DEBUG" = true ]; then
@@ -54,12 +60,6 @@ if [ "$TILLERLESS" = false ]; then
   fi
   helm "$@"
 else
-  # create tiller-namespace if it doesn't exist (helm --init would usually do this with server-side tiller'
-  if [[ -n $TILLER_NAMESPACE ]]; then
-    echo "Creating tiller namespace $TILLER_NAMESPACE"
-    kubectl get namespace $TILLER_NAMESPACE || kubectl create namespace $TILLER_NAMESPACE
-  fi
-
   echo "Starting local tiller server"
   #default inherits --listen localhost:44134 and TILLER_NAMESPACE
   #use the secret driver by default
