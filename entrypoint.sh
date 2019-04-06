@@ -47,9 +47,13 @@ fi
 echo "Running: helm repo update"
 helm repo update
 
-# if 'TILLERLESS=true' is set, run a local tiller server with the secret backend
-# see also https://github.com/helm/helm/blob/master/docs/securing_installation.md#running-tiller-locally
-if [ "$TILLERLESS" = true ]; then
+# if 'TILLERLESS=false', run with server-side tiller
+if [ "$TILLERLESS" = false ]; then
+  if [ "$DEBUG" = true ]; then
+      echo "Running: helm $@"
+  fi
+  helm "$@"
+else
   # create tiller-namespace if it doesn't exist (helm --init would usually do this with server-side tiller'
   if [[ -n $TILLER_NAMESPACE ]]; then
     echo "Creating tiller namespace $TILLER_NAMESPACE"
@@ -69,9 +73,4 @@ if [ "$TILLERLESS" = true ]; then
   echo "Stopping local tiller server"
   pkill tiller
   exit $exitCode
-else
-  if [ "$DEBUG" = true ]; then
-      echo "Running: helm $@"
-  fi
-  helm "$@"
 fi
