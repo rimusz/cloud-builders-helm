@@ -53,24 +53,20 @@ if [[ -n $TILLER_NAMESPACE ]]; then
   kubectl get namespace $TILLER_NAMESPACE || kubectl create namespace $TILLER_NAMESPACE
 fi
 
-# if 'TILLERLESS=false', run with server-side tiller
-if [ "$TILLERLESS" = false ]; then
+# if 'TILLERLESS=false' is set then don't use the Tillerless plugin
+if [ "$TILLERLESS" = true ]; then
   if [ "$DEBUG" = true ]; then
-      echo "Running: helm $@"
+      echo "Running: command $@"
   fi
-  helm "$@"
+  exec "$@"
 else
-  echo "Starting local tiller server"
-  #default inherits --listen localhost:44134 and TILLER_NAMESPACE
-  #use the secret driver by default
-  tiller --storage=secret --history-max=${HELM_TILLER_HISTORY_MAX} &
+  echo "Starting Tillerless plugin"
+  helm tiller start-ci "$TILLER_NAMESPACE"
+  echo
   export HELM_HOST=localhost:44134
   if [ "$DEBUG" = true ]; then
-      echo "Running: helm $@"
+      echo "Running: command $@"
   fi
-  helm "$@"
-  exitCode=$?
-  echo "Stopping local tiller server"
-  pkill tiller
-  exit $exitCode
+  exec "$@"
+  helm tiller stop
 fi

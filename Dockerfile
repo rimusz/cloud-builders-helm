@@ -21,10 +21,11 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   && chmod 700 /tmp/get_helm.sh \
   && /tmp/get_helm.sh \
   && rm -rf /tmp/* \
-  && curl -SsL https://github.com/roboll/helmfile/releases/download/v0.54.0/helmfile_linux_amd64 > helmfile \
-  && chmod 700 helmfile \
+  && helm plugin install https://github.com/rimusz/helm-tiller \
   && helm plugin install https://github.com/viglesiasce/helm-gcs.git --version v0.2.0 \
-  && helm plugin install https://github.com/databus23/helm-diff --version master
+  && helm plugin install https://github.com/databus23/helm-diff --version master \
+  && curl -SsL https://github.com/roboll/helmfile/releases/download/v0.54.0/helmfile_linux_amd64 > helmfile \
+  && chmod 700 helmfile
 
 COPY /entrypoint.sh /
 
