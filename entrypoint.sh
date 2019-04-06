@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Maximum number of releases kept in release history, defaults to 20
+: "${HELM_TILLER_HISTORY_MAX:=20}"
+
 # If there is no current context, get one.
 if [[ $(kubectl config current-context 2> /dev/null) == "" ]]; then
     # This tries to read environment variables. If not set, it grabs from gcloud
@@ -47,7 +50,6 @@ helm repo update
 # if 'TILLERLESS=true' is set, run a local tiller server with the secret backend
 # see also https://github.com/helm/helm/blob/master/docs/securing_installation.md#running-tiller-locally
 if [ "$TILLERLESS" = true ]; then
-  : "${HELM_TILLER_HISTORY_MAX:=20}"
   # create tiller-namespace if it doesn't exist (helm --init would usually do this with server-side tiller'
   if [[ -n $TILLER_NAMESPACE ]]; then
     echo "Creating tiller namespace $TILLER_NAMESPACE"

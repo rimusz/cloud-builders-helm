@@ -1,4 +1,4 @@
-FROM gcr.io/google_containers/ubuntu-slim:0.14
+FROM gcr.io/cloud-builders/gcloud
 
 LABEL maintainer="Rimas Mocevicius <rmocius@gmail.com>"
 
