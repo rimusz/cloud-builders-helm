@@ -1,6 +1,6 @@
 FROM gcr.io/google_containers/ubuntu-slim:0.14
 
-MAINTAINER Rimas Mocevicius <rmocius@gmail.com>
+LABEL maintainer="Rimas Mocevicius <rmocius@gmail.com>"
 
 ARG VCS_REF
 ARG BUILD_DATE
