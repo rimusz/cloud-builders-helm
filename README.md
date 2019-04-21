@@ -1,12 +1,12 @@
-# GCP Container Builder with Helm
+# GCP Cloud Builder with Helm
 
+This Cloud Builder runs [`helm`](https://github.com/kubernetes/helm) along with some [add-ons](#add-ons) and is available at `gcr.io/rimusz-lab1/cloud-builders-helm`
 
-This Container Builder build step runs [`helm`](https://github.com/kubernetes/helm).
-Is available as `gcr.io/rimusz-lab1/cloud-builders-helm`
+<a name="add-ons"></a>
+## Add-ons
+It supports [Tillerless Helm](https://rimusz.net/tillerless-helm/) and comes with [helm-gcs](https://github.com/viglesiasce/helm-gcs), [helm-diff](https://github.com/databus23/helm-diff) and [helmfile](https://github.com/roboll/helmfile) baked in.
 
-It now also supports [Tillerless Helm](https://rimusz.net/tillerless-helm/).
-
-## Using this builder with Google Container Engine
+## Using this builder with Google Kubernetes Engine
 
 To use this builder, your
 [Cloud Build Service Account](https://cloud.google.com/cloud-build/docs/securing-builds/set-service-account-permissions)
@@ -107,3 +107,16 @@ You can also automate builds by using `Container Registry build trigger` and con
 as per example below:
 
 ![dockerbuilder-trigger](dockerbuilder-trigger.png "dockerbuilder-trigger")
+
+
+## Configuration
+
+The following options are configurable via environment variables passed to the build step in the `env` parameter:
+
+| Option        | Description   |
+| ------------- | ------------- |
+| HELM_REPO_NAME | External Helm repository name, optional |
+| HELM_REPO_URL | External Helm repo URL, optional |
+| TILLERLESS | If fals, Tillerless Helm is disabled, optional |
+| TILLER_NAMESPACE | Tiller namespace, optional |
+| HELM_TILLER_HISTORY_MAX | maximum number of releases kept in release history, optional|

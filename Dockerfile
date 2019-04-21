@@ -1,6 +1,6 @@
-FROM gcr.io/google_containers/ubuntu-slim:0.14
+FROM gcr.io/cloud-builders/gcloud
 
-MAINTAINER Rimas Mocevicius <rmocius@gmail.com>
+LABEL maintainer="Rimas Mocevicius <rmocius@gmail.com>"
 
 ARG VCS_REF
 ARG BUILD_DATE
@@ -20,7 +20,12 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   && curl https://raw.githubusercontent.com/helm/helm/master/scripts/get > /tmp/get_helm.sh \
   && chmod 700 /tmp/get_helm.sh \
   && /tmp/get_helm.sh \
-  && rm -rf /tmp/*
+  && rm -rf /tmp/* \
+  && helm plugin install https://github.com/rimusz/helm-tiller \
+  && helm plugin install https://github.com/viglesiasce/helm-gcs.git --version v0.2.0 \
+  && helm plugin install https://github.com/databus23/helm-diff --version master \
+  && curl -SsL https://github.com/roboll/helmfile/releases/download/v0.54.0/helmfile_linux_amd64 > helmfile \
+  && chmod 700 helmfile
 
 COPY /entrypoint.sh /
 
