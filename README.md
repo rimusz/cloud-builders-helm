@@ -117,6 +117,6 @@ The following options are configurable via environment variables passed to the b
 | ------------- | ------------- |
 | HELM_REPO_NAME | External Helm repository name, optional |
 | HELM_REPO_URL | External Helm repo URL, optional |
-| TILLERLESS | If fals, Tillerless Helm is disabled, optional |
+| TILLERLESS | If false, Tillerless Helm is disabled, optional |
 | TILLER_NAMESPACE | Tiller namespace, optional |
 | HELM_TILLER_HISTORY_MAX | maximum number of releases kept in release history, optional|
